@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>learnAjax</title>
+	<style>
+		body {
+		}
+
+		.textCenter {
+			text-align: center;
+		}
+
+		.centerBox {
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.listItem {
+			transition: all ease-in .2s;
+			box-sizing: border-box;
+			background: #dadada;
+			width: 200px;
+			height: 200px;
+			margin: 20px;
+			padding: 10px;
+			border: 1px solid #d3d3d3;
+
+			border-radius: 6px;
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+		}
+
+		.listItem:hover {
+			transform: translate(-4px, -10px);
+			box-shadow: 4px 4px 16px #b6b6b6;
+		}
+
+		.listItem .info {
+			font-size: 12px;
+			color: #ffffff;
+			display: flex;
+			flex-flow: row nowrap;
+		}
+
+		ul li {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+<h3 class="textCenter">成员列表</h3>
+<ul class="centerBox" id="userList">
+	<!--将新增的dom元素插入此处，按照以下的element格式-->
+	<li class="listItem">
+		<div class="info">
+			<span>姓名：</span>
+			<span>这个是测试数据</span>
+		</div>
+	</li>
+</ul>
+</body>
+<!--*****************************-->
+<!--type your code below!-->
+<!--*****************************-->
+<script src="jquery.min.js"></script>
+<script>
+	/*在这里写你的js代码*/
+	var baseURL = "http://api.helloyzy.cn"; // 请求地址
+</script>
+</html>
