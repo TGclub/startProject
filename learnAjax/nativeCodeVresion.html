@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>nativeCodeVersion</title>
+	<style>
+		body {
+		}
+
+		.textCenter {
+			text-align: center;
+		}
+
+		.centerBox {
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.listItem {
+			transition: all ease-in .2s;
+			box-sizing: border-box;
+			background: #dadada;
+			width: 200px;
+			height: 200px;
+			margin: 20px;
+			padding: 10px;
+			border: 1px solid #d3d3d3;
+
+			border-radius: 6px;
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+		}
+
+		.listItem:hover {
+			transform: translate(-4px, -10px);
+			box-shadow: 4px 4px 16px #b6b6b6;
+		}
+
+		.listItem .info {
+			font-size: 12px;
+			color: #ffffff;
+			display: flex;
+			flex-flow: row nowrap;
+		}
+
+		ul li {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+<h3 class="textCenter">成员列表</h3>
+<ul class="centerBox" id="userList">
+</ul>
+
+
+</body>
+<!--*****************************-->
+<!--type your code below!-->
+<!--*****************************-->
+<script src="jquery.min.js"></script>
+<script>
+	var baseURL = "http://api.helloyzy.cn"; // 请求地址
+	var xhr = new XMLHttpRequest(); // 实例化XHR对象
+	var i = 0; // 用于迭代的索引
+	var createTemplate = function (info) {
+		return `
+		<div class="info">
+			<span>姓名：</span>
+			<span>${info.name}</span>
+		</div>
+		<div class="info">
+			<span>性别：</span>
+			<span>${info.sex === 1 ? '男' : '女'}</span>
+		</div>
+		<div class="info">
+			<span>居住地：</span>
+			<span>${info.place}</span>
+		</div>
+		<div class="info">
+			<span>职业：</span>
+			<span>${info.work}</span>
+		</div>
+		<div class="info">
+			<span>留言：</span>
+			<span>${info.message}</span>
+		</div>`
+	}; // dom元素，用了es6的模板字符串语法，如果不用必须要写很多+号
+
+	/*渲染函数*/
+	var renderData = function (dataObject) {
+		for (i; i < dataObject.length; ++i) {
+			var elem = document.createElement('li');
+			elem.className = "listItem";
+			elem.innerHTML = createTemplate(dataObject[i]);
+			document.getElementById('userList').appendChild(elem);
+		}
+	};
+
+	/*open一个新请求，也可以理解为配置XHR的参数*/
+	xhr.open('GET', baseURL, true); // async http get request
+
+	/*定义请求的回调函数*/
+	xhr.onload = function () {
+		if (this.readyState === 4 || this.status === 200) {
+			renderData(JSON.parse(this.responseText)) // 调用渲染函数
+		}
+	};
+
+	/*发送请求*/
+	xhr.send();
+</script>
+</html>
