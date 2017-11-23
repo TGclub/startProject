@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JQueryCodeVersion</title>
+	<style>
+		body {
+		}
+
+		.textCenter {
+			text-align: center;
+		}
+
+		.centerBox {
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.listItem {
+			transition: all ease-in .2s;
+			box-sizing: border-box;
+			background: #dadada;
+			width: 200px;
+			height: 200px;
+			margin: 20px;
+			padding: 10px;
+			border: 1px solid #d3d3d3;
+
+			border-radius: 6px;
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+		}
+
+		.listItem:hover {
+			transform: translate(-4px, -10px);
+			box-shadow: 4px 4px 16px #b6b6b6;
+		}
+
+		.listItem .info {
+			font-size: 12px;
+			color: #ffffff;
+			display: flex;
+			flex-flow: row nowrap;
+		}
+
+		ul li {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+<h3 class="textCenter">成员列表</h3>
+<ul class="centerBox" id="userList">
+</ul>
+</body>
+<!--*****************************-->
+<!--type your code below!-->
+<!--*****************************-->
+<script src="jquery.min.js"></script>
+<script>
+	var baseURL = "http://api.helloyzy.cn"; // 请求地址
+	var createTemplate = function (info) {
+		return `
+		<li class="listItem">
+		<div class="info">
+			<span>姓名：</span>
+			<span>${info.name}</span>
+		</div>
+		<div class="info">
+			<span>性别：</span>
+			<span>${info.sex === 1 ? '男' : '女'}</span>
+		</div>
+		<div class="info">
+			<span>居住地：</span>
+			<span>${info.place}</span>
+		</div>
+		<div class="info">
+			<span>职业：</span>
+			<span>${info.work}</span>
+		</div>
+		<div class="info">
+			<span>留言：</span>
+			<span>${info.message}</span>
+		</div>
+</li>`
+	}; // dom元素，用了es6的模板字符串语法，如果不用必须要写很多+号
+
+	$.ajax({
+		url: baseURL,
+		method: 'GET',
+		async: true,
+		success: function (data) {
+			for (let item of JSON.parse(data)) {
+				$('#userList').append(createTemplate(item))
+			}
+		},
+		fail: function (err) {
+			console.log(err)
+		}
+	});
+</script>
+</html>
